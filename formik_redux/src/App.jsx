@@ -9,11 +9,11 @@ function App() {
     <React.Fragment>
         <NavBar />
         {/* <CreateForm /> */}
-        <Router>
+        {/* <Router> */}
             <Routes>
-                <Route path="/create" element={<CreateForm />} />
+                <Route path="/create" element={<CreateForm />} exact />
             </Routes>
-        </Router>
+        {/* </Router> */}
     </React.Fragment>
   )
 }

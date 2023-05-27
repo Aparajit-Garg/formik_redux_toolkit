@@ -7,19 +7,27 @@ const CreateForm = () => {
     return (
         <div className={classes.__form}>
             <Formik
-            initialValues={{ email: '', password: '' }}
+            initialValues={{ name: '', email: '', age: '', gender: ''}}
             validate={values => {
                 const errors = {};
+                if (!values.name)
+                    errors.name = 'Required';
+                if(!values.age)
+                    errors.age = 'Required';
+                if(!values.gender)
+                    errors.gender = 'Required';
                 if (!values.email) {
-                errors.email = 'Required';
+                    errors.email = 'Required';
                 } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
-                errors.email = 'Invalid email address';
+                    errors.email = 'Invalid email address';
                 }
+
                 return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
+                console.log(values);
                 setTimeout(() => {
                 alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
@@ -30,24 +38,23 @@ const CreateForm = () => {
                 <Form>
                 <label> Name</label>
                 <Field type="name" name="name" />
-                <ErrorMessage name="email" component="div" />
+                <ErrorMessage name="name" component="div" />
                 <label> Email</label>
                 <Field type="email" name="email" />
                 <ErrorMessage name="email" component="div" />
                 <label>Age</label>
-                <Field type="password" name="password" />
-                <ErrorMessage name="password" component="div" />
+                <Field type="number" name="age" />
+                <ErrorMessage name="age" component="div" />
                 <label> Gender </label>
                 <div className={classes.radio__button} role="group" aria-labelledby="my-radio-group">
-                    
                     <span>
-                        <Field type="radio" name="picked" value="Male" />
+                        <Field type="radio" name="gender" value="Male" />
                         <label>
                             Male
                         </label>
                     </span>
                     <span>
-                        <Field type="radio" name="picked" value="Female" />
+                        <Field type="radio" name="gender" value="Female" />
                         <label>
                             Female
                         </label>

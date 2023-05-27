@@ -1,14 +1,15 @@
 import classes from "./NavBar.module.css";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
     
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     return (
         <nav className={classes.nav__bar}>
             <div>
-                <button>Create Post</button>
+                <button onClick={() => navigate("/")}>Home</button>
+                <button onClick={() => navigate("/create")}>Create Post</button>
                 <button>All Posts</button>
             </div>
             <div>
