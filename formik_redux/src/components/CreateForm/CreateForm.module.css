@@ -1,0 +1,70 @@
+/* * {
+    background-color: cyan;
+} */
+.__form {
+    width: 100vw;
+    /* height: 10rem; */
+    /* background-color: cyan; */
+    /* margin: 2rem; */
+    padding: 2rem;
+}
+
+Form {
+    background-color: cyan;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+Form > label {
+    background-color: cyan;
+    font-weight: 600;
+}
+
+Form > div {
+    font-weight: 600;
+    color: red;
+    background-color: cyan;
+}
+
+.radio__button {
+    display: flex;
+    flex-direction: column;
+    background-color: cyan;
+    width: inherit;
+    color: black;
+    font-weight: 500;
+    /* background-color: red; */
+    justify-content: flex-start;
+    /* align-items: flex-start; */
+    gap: 1rem;
+}
+
+.radio__button > span {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: cyan;
+}
+
+.radio__button > span > label {
+    background-color: cyan;
+}
+
+input[type=radio] {
+    width: 5rem;
+    height: 1.5em;
+    cursor: pointer;
+}
+
+Form > button {
+    all: unset;
+    margin: 1rem;
+    padding: 0.5rem;
+    background-color: yellow;
+    cursor: pointer;
+}
