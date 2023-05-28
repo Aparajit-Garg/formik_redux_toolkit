@@ -15,7 +15,7 @@
     gap: 1rem;
 }
 
-.nav__bar > div:first-child button {
+.nav__bar > div:first-child a {
     all: unset;
     background-color: lightpink;
     padding: 0.5rem;

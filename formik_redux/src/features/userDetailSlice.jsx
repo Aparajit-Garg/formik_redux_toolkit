@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// import axios from "axios";
 
+// createAsyncThunk is used to handle async operations with redux
 export const createUser = createAsyncThunk("createUser", async (data, {rejectWithValue}) => {
     const response = await fetch("https://64724fdc6a9370d5a41b3fd0.mockapi.io/crud", {
         method: "POST",
@@ -14,6 +16,19 @@ export const createUser = createAsyncThunk("createUser", async (data, {rejectWit
         return result;
     } catch (error) {
         console.log(error);
+        rejectWithValue(error);
+    }
+});
+
+
+export const showUsers = createAsyncThunk("showUsers", async (args, {rejectWithValue}) => {
+    const response = await fetch("https://64724fdc6a9370d5a41b3fd0.mockapi.io/crud");
+
+    try {
+        const result = await response.json();
+        console.log(result);
+        return result;
+    } catch (error) {
         rejectWithValue(error);
     }
 })
@@ -36,6 +51,17 @@ const userDetail = createSlice({
             state.users.push(action.payload);
         },
         [createUser.rejected]: (state, action) => {
+            state.loading = false;
+            state.users = action.payload;
+        },
+        [showUsers.pending]: (state) => {
+            state.loading = true;
+        },
+        [showUsers.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.users = action.payload;
+        },
+        [showUsers.rejected]: (state, action) => {
             state.loading = false;
             state.users = action.payload;
         }

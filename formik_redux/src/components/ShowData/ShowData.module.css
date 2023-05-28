@@ -1,0 +1,30 @@
+
+.header {
+    margin: 2rem;
+    display: flex;
+    gap: 2rem;
+    background-color: cyan;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    background-color: bisque;
+    gap: 0.5rem;
+}
+
+.card > * {
+    background-color: bisque;
+    padding: 0.5rem;
+}
+
+.card > span > span:first-child {
+    font-weight: 600;
+}
+
+.card > span > * {
+    background-color: bisque;
+}

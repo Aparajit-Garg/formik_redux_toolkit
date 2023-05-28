@@ -1,16 +1,16 @@
+import CreateForm from "../CreateForm/CreateForm";
+import ShowData from "../ShowData/ShowData";
 import classes from "./NavBar.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
-    
-    const navigate = useNavigate();
 
     return (
         <nav className={classes.nav__bar}>
             <div>
-                <button onClick={() => navigate("/")}>Home</button>
-                <button onClick={() => navigate("/create")}>Create Post</button>
-                <button>All Posts</button>
+                <Link to="/" element={<NavBar />}>Home</Link>
+                <Link to="/create" element={<CreateForm />}> Create Post </Link>
+                <Link to="/showPosts" element={<ShowData />}> Show Posts </Link>
             </div>
             <div>
                 <input type="search" placeholder="Search"></input>
