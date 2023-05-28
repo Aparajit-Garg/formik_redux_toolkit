@@ -9,7 +9,7 @@ import { editUser } from '../../features/userDetailSlice';
 const EditUser = (props) => {
 
     const {id} = useParams();
-    const [userData, setUserData] = useState();
+    const [userData, setUserData] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -31,7 +31,10 @@ const EditUser = (props) => {
         <div className={classes.__form}>
             <Formik
             enableReinitialize= {true}
-            initialValues={{ name: userData && userData.name, email: userData && userData.email, age: userData && userData.age, gender: userData && userData.gender}}
+            initialValues={{ name: userData ? userData.name : '', 
+                            email: userData ? userData.email : '', 
+                            age: userData ? userData.age : '', 
+                            gender: userData ? userData.gender : ''}}
             validate={values => {
                 const errors = {};
                 if (!values.name)

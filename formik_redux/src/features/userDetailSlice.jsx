@@ -119,7 +119,12 @@ const userDetail = createSlice({
         },
         [editUser.fulfilled]: (state, action) => {
             state.loading = false;
-            state.users = action.payload;
+            // the action.payload contains only the updated entry as the object, map logic updates the value in the store
+            // which then reflects on the showPosts page. Otherwise there will be an error with
+            // state.users = action.payload
+            state.users = state.users.map((ele) => {
+                return ele.id === action.payload.id ? action.payload : ele;
+            });
         },
         [editUser.rejected]: (state, action) => {
             state.loading = false;

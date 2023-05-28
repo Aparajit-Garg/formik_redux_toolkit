@@ -4,7 +4,7 @@ import { deleteUsers, showUsers } from "../../features/userDetailSlice";
 import classes from "./ShowData.module.css";
 import Modal from "../Modal/Modal";
 import EditUser from "../EditUser/EditUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ShowData = () => {
 
@@ -12,9 +12,11 @@ const ShowData = () => {
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
     const {users, loading} = useSelector((state) => state.app);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(showUsers());
+        console.log(users);
     }, []);
 
     if (loading)
@@ -41,7 +43,7 @@ const ShowData = () => {
                         </span>
                         <span>
                             <button onClick={() => [setId(user.id), setShowModal(true)]}> View </button>
-                            <Link to={`/edit/${user.id}`} element={<EditUser />}> Edit </Link>
+                            <button onClick={() => navigate(`/edit/${user.id}`)}> Edit </button>
                             <button onClick={() => dispatch(deleteUsers(user.id))}> Delete </button>
                         </span>
                     </div>
