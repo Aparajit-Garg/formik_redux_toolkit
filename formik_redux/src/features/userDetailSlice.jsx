@@ -45,6 +45,25 @@ export const deleteUsers = createAsyncThunk("deleteUsers", async (id, {rejectWit
     } catch (error) {
         rejectWithValue(error);
     }
+});
+
+
+export const editUser = createAsyncThunk("editUser", async (data, {rejectWithValue}) => {
+    const response = await fetch(`https://64724fdc6a9370d5a41b3fd0.mockapi.io/crud/${data.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    try {
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        rejectWithValue(error);
+    }
 })
 
 const userDetail = createSlice({
@@ -92,6 +111,17 @@ const userDetail = createSlice({
             
         },
         [deleteUsers.rejected]: (state, action) => {
+            state.loading = false;
+            state.users = action.payload;
+        },
+        [editUser.pending]: (state) => {
+            state.loading = true;
+        },
+        [editUser.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.users = action.payload;
+        },
+        [editUser.rejected]: (state, action) => {
             state.loading = false;
             state.users = action.payload;
         }

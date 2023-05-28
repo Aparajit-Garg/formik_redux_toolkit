@@ -4,6 +4,7 @@ import CreateForm from "./components/CreateForm/CreateForm";
 import {Routes, Route} from "react-router-dom";
 import ShowData from "./components/ShowData/ShowData";
 import "./App.css";
+import EditUser from './components/EditUser/EditUser';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Routes>
                 <Route path="/create" element={<CreateForm />} exact />
                 <Route path="/showPosts" element={<ShowData />} exact />
+                <Route path="/edit/:id" element={<EditUser />} />
             </Routes>
         {/* </Router> */}
     </React.Fragment>

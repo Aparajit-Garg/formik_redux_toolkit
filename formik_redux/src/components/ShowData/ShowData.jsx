@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, showUsers } from "../../features/userDetailSlice";
 import classes from "./ShowData.module.css";
 import Modal from "../Modal/Modal";
+import EditUser from "../EditUser/EditUser";
+import { Link } from "react-router-dom";
 
 const ShowData = () => {
 
@@ -39,7 +41,7 @@ const ShowData = () => {
                         </span>
                         <span>
                             <button onClick={() => [setId(user.id), setShowModal(true)]}> View </button>
-                            <button> Edit </button>
+                            <Link to={`/edit/${user.id}`} element={<EditUser />}> Edit </Link>
                             <button onClick={() => dispatch(deleteUsers(user.id))}> Delete </button>
                         </span>
                     </div>
