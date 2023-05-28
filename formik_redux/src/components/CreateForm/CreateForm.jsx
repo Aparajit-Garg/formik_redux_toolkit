@@ -1,9 +1,13 @@
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import classes from "./CreateForm.module.css";
+import { useDispatch } from "react-redux";
+import { createUser } from "../../features/userDetailSlice";
 
 
 const CreateForm = () => {
+    const dispatch = useDispatch();
+
     return (
         <div className={classes.__form}>
             <Formik
@@ -26,12 +30,15 @@ const CreateForm = () => {
 
                 return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={(values, { setSubmitting, resetForm }) => {
                 console.log(values);
-                setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
-                }, 400);
+                dispatch(createUser(values));
+                resetForm();
+                // setTimeout(() => {
+                // alert(JSON.stringify(values, null, 2));
+                // setSubmitting(false);
+                // }, 400);
             }}
             >
             {({ isSubmitting }) => (
