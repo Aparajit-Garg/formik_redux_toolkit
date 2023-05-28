@@ -28,3 +28,18 @@
 .card > span > * {
     background-color: bisque;
 }
+
+.card > span:nth-child(4) {
+    display: flex;
+    gap: 1rem;
+    
+}
+
+.card > span:nth-child(4) > button {
+    all: unset;
+    padding: 0.2rem;
+    background-color: blue;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}

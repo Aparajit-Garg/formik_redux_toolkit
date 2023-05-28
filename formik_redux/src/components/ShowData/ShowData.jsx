@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showUsers } from "../../features/userDetailSlice";
+import { deleteUsers, showUsers } from "../../features/userDetailSlice";
 import classes from "./ShowData.module.css";
-
+import Modal from "../Modal/Modal";
 
 const ShowData = () => {
 
+    const [id, setId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
     const {users, loading} = useSelector((state) => state.app);
 
@@ -18,6 +20,7 @@ const ShowData = () => {
     
     return (
       <React.Fragment>
+        {showModal && <Modal id={id} setShowModal={setShowModal}/>}
         <div className={classes.header}>
             {users && users.map((user) => {
                 return (
@@ -27,16 +30,17 @@ const ShowData = () => {
                             <span> {user.name} </span>
                         </span>
                         <span>
-                            <span>Age: </span> 
-                            <span> {user.age}</span>
-                        </span>
-                        <span>
                             <span> Gender: </span>
                             <span> {user.gender}</span>
                         </span>
                         <span>
                             <span>Email: </span>
                             <span> {user.email}</span>
+                        </span>
+                        <span>
+                            <button onClick={() => [setId(user.id), setShowModal(true)]}> View </button>
+                            <button> Edit </button>
+                            <button onClick={() => dispatch(deleteUsers(user.id))}> Delete </button>
                         </span>
                     </div>
                 )
