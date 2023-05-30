@@ -3,15 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUsers, showUsers } from "../../features/userDetailSlice";
 import classes from "./ShowData.module.css";
 import Modal from "../Modal/Modal";
-import EditUser from "../EditUser/EditUser";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ShowData = () => {
 
     const [id, setId] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
-    const {users, loading} = useSelector((state) => state.app);
+    const {users, loading, searchData} = useSelector((state) => state.app);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,7 +25,16 @@ const ShowData = () => {
       <React.Fragment>
         {showModal && <Modal id={id} setShowModal={setShowModal}/>}
         <div className={classes.header}>
-            {users && users.map((user) => {
+            {
+            users &&
+            users?.filter((user) => {
+                if (searchData.length === 0)
+                    return user;
+                else {
+                    return user.name.toLowerCase().includes(searchData.toLowerCase())
+                }
+            })
+             .map((user) => {
                 return (
                     <div className={classes.card} key={user.id}>
                         <span>

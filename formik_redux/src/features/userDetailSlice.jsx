@@ -66,12 +66,20 @@ export const editUser = createAsyncThunk("editUser", async (data, {rejectWithVal
     }
 })
 
+
 const userDetail = createSlice({
     name: "userDetail",
     initialState: {
         users: [],
         loading: false,
-        error: null
+        error: null,
+        searchData: []
+    },
+
+    reducers: {
+        searchText: (state, action) => {
+            state.searchData = action.payload;
+        }
     },
     // createAsynThunk returns a promise as it's having a callback function with async, so to handle that extraReducers
     // are used.
@@ -133,4 +141,5 @@ const userDetail = createSlice({
     }
 });
 
+export const { searchText } = userDetail.actions;
 export default userDetail.reducer;
