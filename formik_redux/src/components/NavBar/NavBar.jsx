@@ -26,12 +26,18 @@ const NavBar = () => {
                 <Link to="/create" element={<CreateForm />}> Create Post </Link>
                 <Link to="/showPosts" element={<ShowData />}> Show Posts ({allPosts.length}) </Link>
                 <div>
-                    <input type="radio" name="gender" value="All" defaultChecked onClick={(e)=> setSearchGenderValue(e.target.value)}/>
-                    <label> All </label>
-                    <input type="radio" name="gender" value="Male" onClick={(e)=> setSearchGenderValue(e.target.value)} />
-                    <label> Male </label>
-                    <input type="radio" name="gender" value="Female" onClick={(e)=> setSearchGenderValue(e.target.value)}/>
-                    <label> Female </label>
+                    <span>
+                        <input type="radio" name="gender" value="All" defaultChecked onClick={(e)=> setSearchGenderValue(e.target.value)}/>
+                        <label> All </label>
+                    </span>
+                    <span>
+                        <input type="radio" name="gender" value="Male" onClick={(e)=> setSearchGenderValue(e.target.value)} />
+                        <label> Male </label>
+                    </span>
+                    <span>
+                        <input type="radio" name="gender" value="Female" onClick={(e)=> setSearchGenderValue(e.target.value)}/>
+                        <label> Female </label>
+                    </span>
                 </div>
             </div>
             <div>

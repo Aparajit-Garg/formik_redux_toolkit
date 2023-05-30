@@ -10,14 +10,11 @@ function App() {
   return (
     <React.Fragment>
         <NavBar />
-        {/* <CreateForm /> */}
-        {/* <Router> */}
             <Routes>
                 <Route path="/create" element={<CreateForm />} exact />
                 <Route path="/showPosts" element={<ShowData />} exact />
                 <Route path="/edit/:id" element={<EditUser />} />
             </Routes>
-        {/* </Router> */}
     </React.Fragment>
   )
 }
