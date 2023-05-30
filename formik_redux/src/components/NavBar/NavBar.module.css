@@ -26,6 +26,19 @@
     background-color: white;
 }
 
+
+.nav__bar > div > div {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 0rem 1rem;
+}
+
+label {
+    background-color: white;
+}
+
+
 input {
     width: 50vw;
     line-height: 1.5rem;

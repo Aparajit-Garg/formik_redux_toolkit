@@ -73,12 +73,17 @@ const userDetail = createSlice({
         users: [],
         loading: false,
         error: null,
-        searchData: []
+        searchData: [],
+        genderSelected: []
     },
 
     reducers: {
         searchText: (state, action) => {
             state.searchData = action.payload;
+        },
+
+        searchGender: (state, action) => {
+            state.genderSelected = action.payload;
         }
     },
     // createAsynThunk returns a promise as it's having a callback function with async, so to handle that extraReducers
@@ -141,5 +146,5 @@ const userDetail = createSlice({
     }
 });
 
-export const { searchText } = userDetail.actions;
+export const { searchText, searchGender } = userDetail.actions;
 export default userDetail.reducer;

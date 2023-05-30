@@ -10,7 +10,7 @@ const ShowData = () => {
     const [id, setId] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
-    const {users, loading, searchData} = useSelector((state) => state.app);
+    const {users, loading, searchData, genderSelected} = useSelector((state) => state.app);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,7 +27,14 @@ const ShowData = () => {
         <div className={classes.header}>
             {
             users &&
-            users?.filter((user) => {
+            users.filter((user) => {
+                if (genderSelected.length === 0 || genderSelected.toLowerCase() == "all")
+                    return user;
+                else {
+                    return user.gender.toLowerCase() == genderSelected.toLowerCase();
+                }
+            })
+            .filter((user) => {
                 if (searchData.length === 0)
                     return user;
                 else {
