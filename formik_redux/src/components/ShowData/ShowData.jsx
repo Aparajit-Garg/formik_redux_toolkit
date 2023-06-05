@@ -15,8 +15,13 @@ const ShowData = () => {
 
     useEffect(() => {
         dispatch(showUsers());
+        // document.getElementById("searchText").disabled = false;
         console.log(users);
     }, []);
+
+    useEffect(() => {
+        document.getElementById("searchText").disabled = false;
+    })
 
     if (loading)
         return <h1>Loading...</h1>

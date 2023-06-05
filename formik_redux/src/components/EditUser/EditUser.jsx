@@ -19,6 +19,7 @@ const EditUser = () => {
 
     useEffect(() => {
         setUserData(data[0]);
+        document.getElementById("searchText").disabled = true;
         console.log(userData);
     }, [])
 
@@ -33,7 +34,8 @@ const EditUser = () => {
             enableReinitialize= {true}
             initialValues={{ name: userData ? userData.name : '', 
                             email: userData ? userData.email : '', 
-                            age: userData ? userData.age : '', 
+                            age: userData ? userData.age : '',
+                            field: userData ? userData.field : '',
                             gender: userData ? userData.gender : ''}}
             validate={values => {
                 const errors = {};
@@ -62,7 +64,7 @@ const EditUser = () => {
                 const valueToPass = {"id": userData.id, "name": values.name, "email": values.email, "field": values.field, "gender": values.gender, "age": values.age};
                 setUserData((prev) => [prev.id, values.name, values.email, values.field, values.gender, values.age]);
                 dispatch(editUser(valueToPass));
-                navigate("/showPosts");
+                navigate("/showDirectory");
             }}
             >
             {({ isSubmitting }) => (

@@ -14,11 +14,12 @@ const NavBar = () => {
     const allPosts = useSelector((state)=>state.app.users);
 
     useEffect(() => {
-    dispatch(searchText(searchTextData));
-    dispatch(searchGender(searchGenderValue));
+        dispatch(searchText(searchTextData));
+        dispatch(searchGender(searchGenderValue));
     }, [searchTextData, searchGenderValue]);
 
     useEffect(() => {
+        document.getElementById("searchText").disabled = true;
         dispatch(showUsers());
     }, [])
 
@@ -26,8 +27,8 @@ const NavBar = () => {
         <nav className={classes.nav__bar}>
             <div>
                 <Link to="/" element={<NavBar />}>Home</Link>
-                <Link to="/create" element={<CreateForm />}> Add new employee </Link>
-                <Link to="/showPosts" element={<ShowData />}> Show employee directory ({allPosts.length}) </Link>
+                <Link to="/add" element={<CreateForm />}> Add new employee </Link>
+                <Link to="/showDirectory" element={<ShowData />}> Show employee directory ({allPosts.length}) </Link>
                 <div>
                     <span>
                         <input type="radio" name="gender" value="All" defaultChecked onClick={(e)=> setSearchGenderValue(e.target.value)}/>
@@ -44,7 +45,7 @@ const NavBar = () => {
                 </div>
             </div>
             <div>
-                <input type="search" placeholder="Search based on name" 
+                <input id="searchText" disabled type="search" placeholder="Search based on name" 
                 onChange={(e) => setSearchTextData(e.target.value)}></input>
             </div>
         </nav>

@@ -4,11 +4,15 @@ import classes from "./CreateForm.module.css";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../features/userDetailSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const CreateForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        document.getElementById("searchText").disabled = true
+    }, []);
     return (
         <div className={classes.__form}>
             <Formik
@@ -38,7 +42,7 @@ const CreateForm = () => {
                 setSubmitting(false);
                 dispatch(createUser(values));
                 resetForm();
-                navigate('/');
+                navigate('/showDirectory');
                 // setTimeout(() => {
                 // alert(JSON.stringify(values, null, 2));
                 // setSubmitting(false);
