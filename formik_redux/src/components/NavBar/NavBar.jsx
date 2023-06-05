@@ -4,7 +4,7 @@ import CreateForm from "../CreateForm/CreateForm";
 import ShowData from "../ShowData/ShowData";
 import classes from "./NavBar.module.css";
 import { Link } from "react-router-dom";
-import { searchText, searchGender } from "../../features/userDetailSlice";
+import { searchText, searchGender, showUsers } from "../../features/userDetailSlice";
 
 const NavBar = () => {
 
@@ -14,17 +14,20 @@ const NavBar = () => {
     const allPosts = useSelector((state)=>state.app.users);
 
     useEffect(() => {
-        console.log(searchTextData);
-        dispatch(searchText(searchTextData));
-        dispatch(searchGender(searchGenderValue));
+    dispatch(searchText(searchTextData));
+    dispatch(searchGender(searchGenderValue));
     }, [searchTextData, searchGenderValue]);
+
+    useEffect(() => {
+        dispatch(showUsers());
+    }, [])
 
     return (
         <nav className={classes.nav__bar}>
             <div>
                 <Link to="/" element={<NavBar />}>Home</Link>
-                <Link to="/create" element={<CreateForm />}> Create Post </Link>
-                <Link to="/showPosts" element={<ShowData />}> Show Posts ({allPosts.length}) </Link>
+                <Link to="/create" element={<CreateForm />}> Add new employee </Link>
+                <Link to="/showPosts" element={<ShowData />}> Show employee directory ({allPosts.length}) </Link>
                 <div>
                     <span>
                         <input type="radio" name="gender" value="All" defaultChecked onClick={(e)=> setSearchGenderValue(e.target.value)}/>
@@ -41,7 +44,7 @@ const NavBar = () => {
                 </div>
             </div>
             <div>
-                <input type="search" placeholder="Search" 
+                <input type="search" placeholder="Search based on name" 
                 onChange={(e) => setSearchTextData(e.target.value)}></input>
             </div>
         </nav>

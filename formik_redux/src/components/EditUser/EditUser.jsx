@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { editUser } from '../../features/userDetailSlice';
 
 
-const EditUser = (props) => {
+const EditUser = () => {
 
     const {id} = useParams();
     const [userData, setUserData] = useState(null);
@@ -43,6 +43,8 @@ const EditUser = (props) => {
                     errors.age = 'Required';
                 if(!values.gender)
                     errors.gender = 'Required';
+                if(!values.field)
+                    errors.field = 'Required';
                 if (!values.email) {
                     errors.email = 'Required';
                 } else if (
@@ -56,17 +58,11 @@ const EditUser = (props) => {
             onSubmit={(values, { setSubmitting, resetForm }) => {
                 console.log(values);
                 setSubmitting(false);
-                // dispatch(createUser(values));
                 resetForm();
-                const valueToPass = {"id": userData.id, "name": values.name, "email": values.email, "gender": values.gender, "age": values.age};
-                setUserData((prev) => [prev.id, values.name, values.email, values.gender, values.age]);
-                // console.log("userdata updated: ", userData);
+                const valueToPass = {"id": userData.id, "name": values.name, "email": values.email, "field": values.field, "gender": values.gender, "age": values.age};
+                setUserData((prev) => [prev.id, values.name, values.email, values.field, values.gender, values.age]);
                 dispatch(editUser(valueToPass));
                 navigate("/showPosts");
-                // setTimeout(() => {
-                // alert(JSON.stringify(values, null, 2));
-                // setSubmitting(false);
-                // }, 400);
             }}
             >
             {({ isSubmitting }) => (
@@ -80,6 +76,9 @@ const EditUser = (props) => {
                 <label>Age</label>
                 <Field type="number" name="age" />
                 <ErrorMessage name="age" component="div" />
+                <label>Field</label>
+                <Field type="name" name="field" />
+                <ErrorMessage name="field" component="div" />
                 <label> Gender </label>
                 <div className={classes.radio__button} role="group" aria-labelledby="my-radio-group">
                     <span>
@@ -95,7 +94,6 @@ const EditUser = (props) => {
                         </label>
                     </span>
                 </div>
-
 
                 <button type="submit" disabled={isSubmitting}>
                     Submit

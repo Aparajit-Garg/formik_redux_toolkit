@@ -19,6 +19,7 @@ const Modal = ({id, setShowModal}) => {
                 <span>Email: {data[0].email}</span>
                 <span>Age: {data[0].age}</span>
                 <span>Gender: {data[0].gender}</span>
+                <span>Field: {data[0].field}</span>
                 <button onClick={()=>setShowModal(false)}> Close </button>
             </div>
 

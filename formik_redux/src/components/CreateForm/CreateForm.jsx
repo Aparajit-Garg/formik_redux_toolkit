@@ -3,15 +3,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import classes from "./CreateForm.module.css";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../features/userDetailSlice";
-
+import { useNavigate } from "react-router-dom";
 
 const CreateForm = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     return (
         <div className={classes.__form}>
             <Formik
-            initialValues={{ name: '', email: '', age: '', gender: ''}}
+            initialValues={{ name: '', email: '', age: '', field: '', gender: ''}}
             validate={values => {
                 const errors = {};
                 if (!values.name)
@@ -20,6 +21,8 @@ const CreateForm = () => {
                     errors.age = 'Required';
                 if(!values.gender)
                     errors.gender = 'Required';
+                if(!values.field)
+                    errors.field = 'Required';
                 if (!values.email) {
                     errors.email = 'Required';
                 } else if (
@@ -35,6 +38,7 @@ const CreateForm = () => {
                 setSubmitting(false);
                 dispatch(createUser(values));
                 resetForm();
+                navigate('/');
                 // setTimeout(() => {
                 // alert(JSON.stringify(values, null, 2));
                 // setSubmitting(false);
@@ -52,6 +56,9 @@ const CreateForm = () => {
                 <label>Age</label>
                 <Field type="number" name="age" />
                 <ErrorMessage name="age" component="div" />
+                <label>Field</label>
+                <Field type="name" name="field" />
+                <ErrorMessage name="field" component="div" />
                 <label> Gender </label>
                 <div className={classes.radio__button} role="group" aria-labelledby="my-radio-group">
                     <span>
