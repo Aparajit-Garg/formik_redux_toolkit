@@ -19,6 +19,7 @@ const EditUser = () => {
 
     useEffect(() => {
         setUserData(data[0]);
+        document.getElementById("tagOptions").style.display = 'none';
         document.getElementById("searchText").disabled = true;
         console.log(userData);
     }, [])

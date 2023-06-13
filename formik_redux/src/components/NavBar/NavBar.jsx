@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import classes from "./NavBar.module.css";
+import classes from "./NavBar.css";
 import { Link } from "react-router-dom";
 import { searchText, searchGender, showUsers } from "../../features/userDetailSlice";
 import CreateForm from "../CreateForm/CreateForm";
@@ -10,7 +10,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const NavBar = () => {
 
-    const [selectedItem, setSelectedItem] = useState();
+    const [selectedItem, setSelectedItem] = useState([]);
     const [searchTextData, setSearchTextData] = useState("");
     const [searchGenderValue, setSearchGenderValue] = useState("");
     const dispatch = useDispatch();
@@ -23,32 +23,39 @@ const NavBar = () => {
 
     useEffect(() => {
         document.getElementById("searchText").disabled = true;
+        document.getElementById("tagOptions").style.display = 'none';
         dispatch(showUsers());
     }, [])
 
+    const toggleClass = (e) => {
+        if (e.target.classList.contains("itemSelected")) {
+            e.target.classList.remove("itemSelected")
+            setSelectedItem(prev => {
+                let index = prev.indexOf(e.target.outerText)
+                if (index !== -1)
+                    prev.splice(index, 1)
+                return [...prev]
+            })
+        }
+        else {
+            e.target.classList.add("itemSelected")
+            setSelectedItem(prev => [...prev, e.target.outerText])
+        }
+    }
+
 
     return (
-        <nav className={classes.nav__bar}>
+        <nav className="nav__bar">
             <div>
                 <Link to="/" element={<NavBar />}>Home</Link>
-                <div>
-                    <select value={selectedItem} onChange={(e) => setSelectedItem(e.target.value)}>
-                        <option>Directory Options</option>
-                        <option>
-                            <Link to="/add" element={<CreateForm />}> Add new employee </Link>
-                        </option>
-                        <option>
-                            <Link to="/showDirectory" element={<ShowData />}> Show employee directory ({allPosts.length}) </Link>
-                        </option>
-                    </select>
-                    <ArrowDropDownIcon className={classes.dropDown} />
-                </div>
-                
-                <div style={{display: "none"}} className={classes.tags}>
-                    <span>Hardware Designing</span>
-                    <span>IT</span>
-                    <span>Security Analyst</span>
-                    <span>Actor</span>
+                <Link to="/add" element={<CreateForm />}> Add new employee </Link>
+                <Link to="/showDirectory" element={<ShowData />}> Show employee directory ({allPosts.length}) </Link>
+
+                <div style={{display: "none"}} id='tagOptions' className="tags">
+                    <span id="hardware" onClick={toggleClass}>Hardware Designing</span>
+                    <span id="it" onClick={toggleClass}>IT</span>
+                    <span id="security" onClick={toggleClass}>Security Analyst</span>
+                    <span id="actor" onClick={toggleClass}>Actor</span>
                     {/* <span>Software Architect</span> */}
                 </div>
             </div>

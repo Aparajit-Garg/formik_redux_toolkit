@@ -11,7 +11,8 @@ const CreateForm = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.getElementById("searchText").disabled = true
+        document.getElementById("searchText").disabled = true;
+        document.getElementById("tagOptions").style.display = 'none';
     }, []);
     return (
         <div className={classes.__form}>

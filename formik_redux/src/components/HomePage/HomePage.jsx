@@ -4,6 +4,7 @@ const HomePage = () => {
     
     useEffect(() => {
         document.getElementById("searchText").disabled = true;
+        document.getElementById("tagOptions").style.display = 'none';
     })
 
     return (

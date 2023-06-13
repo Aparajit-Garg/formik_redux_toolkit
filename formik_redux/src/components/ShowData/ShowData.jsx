@@ -21,6 +21,7 @@ const ShowData = () => {
 
     useEffect(() => {
         document.getElementById("searchText").disabled = false;
+        document.getElementById("tagOptions").style.display = 'flex';
     })
 
     if (loading)
